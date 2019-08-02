@@ -1,0 +1,29 @@
+<% include ../../partials/header %>
+
+<div class="container">
+    <h1>Edit: <%= subregion.name %></h1>
+    <form action="/region/<%= regionid %>/subregions/<%= subregion._id %>?_method=PUT" method="POST" class="form-signin form-encounter">
+    <div class="form-group">
+        <label for="name">Subregion Name</label>
+        <input type="text" class="form-control" id="name" name="subregion[name]" value="<%= subregion.name %>">
+    </div>
+    <div class="form-group">
+        <label for="image">Image Filename</label>
+        <input type="text" class="form-control" id="image" name="subregion[imagePath]" value="<%= subregion.imagePath %>">
+    </div>
+    <div class="form-group">
+        <label for="biome">Biome</label>
+        <input type="text" class="form-control" id="biome" name="subregion[biome]" value="<%= subregion.biome %>">
+    </div>
+    <div class="form-group">
+        <label for="description">Subregion Description</label>
+        <textarea class="form-control" id="description" name="subregion[description]" rows="4" placeholder="This is the end of the world."><%= subregion.description %></textarea>
+    </div>
+    <button type="submit" class="btn btn-success col-sm-6">Submit</button>
+    </form>
+    <form action="/region/<%= regionid %>/subregions/<%= subregion._id %>?_method=DELETE" method="POST" class="form-signin form-encounter">
+        <button type="submit" class="btn btn-primary col-sm-6">Delete</button>
+    </form>
+</div>
+
+<% include ../../partials/footer %>

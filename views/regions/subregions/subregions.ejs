@@ -1,0 +1,34 @@
+<% include ../../partials/header %>
+
+<div class="container">
+    <h1 class="warp-title pageTitle"><%=region.name %></h1>
+    <div class="thumbnail"> 
+        <img class="img-responsive region col-sm-6 col-centered mx-auto" src="/img/regions/<%= region.imagePath %>" />
+    </div>
+    <h2 class="warp-title pageTitle">Subregion List</h2>
+    <div class="row">
+        <a href="/region/<%= region._id %>/subregions/new" class="btn btn-primary btn-spacing col-md-4 mx-auto">Create New</a>
+    </div>
+    <div class="row">
+    <% region.subregions.forEach(function(subregion){ %>
+        <div class="region col-sm-6 col-centered mx-auto">
+            <div class="thumbnail"> 
+                <img class="img-responsive" src="/img/regions/subregions/<%= subregion.imagePath %>" />
+            </div>
+            <h2><%= subregion.name %></h2>
+            <h3 class="biome"><%= subregion.biome %></h3>
+            <p class="region-description description"><%= subregion.description %></p>
+            <div class="row">
+                <a href="/region/<%= region._id %>/subregions/<%= subregion._id %>/edit" class="btn btn-primary btn-region col-sm-4 mx-auto">Edit/Delete</a>
+                <a href="/region/<%= region._id %>/subregions/<%= subregion._id %>/travel" class="btn btn-primary btn-region col-sm-4 mx-auto">Travel</a>
+            </div>
+            <div class="row">
+                <a href="/region/<%= region._id %>/subregions/<%= subregion._id %>/encounters" class="btn btn-primary btn-region col-sm-4 mx-auto">Encounter Manager</a>
+                <a href="/region/<%= region._id %>/subregions/<%= subregion._id %>/pois" class="btn btn-primary btn-region col-sm-4 mx-auto">Points of Interest</a>
+            </div>
+        </div>
+    <% }) %> 
+    </div>
+</div>
+
+<% include ../../partials/footer %>

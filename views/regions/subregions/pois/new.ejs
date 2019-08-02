@@ -1,0 +1,33 @@
+<% include ../../../partials/header %>
+
+<div class="container">
+    <h1>New Point of Interest for <%= region.name %></h1>
+    <form action="/region/<%= regionID %>/subregions/<%= region._id %>/pois/new" method="POST" class="form-signin form-encounter">
+    <div class="form-group">
+        <label for="name">Point of Interest Name</label>
+        <input type="text" class="form-control" id="name" name="poi[name]" placeholder="The Grand Butte">
+    </div>
+    <div class="form-group">
+        <label for="image">Image Filename</label>
+        <input type="text" class="form-control" id="image" name="poi[imagePath]" placeholder="butte.png">
+    </div>
+    <div class="form-group">
+        <label for="type">Point of Interest Type</label>
+        <select class="form-control" name="poi[type]" id="type">
+            <option value="Civilized Settlement">Civilized Settlement (Town, Village, City)</option>
+            <option value="Encampment">Monster/Bandit Encampment</option>
+            <option value="Fortification">Fortification (Castle, Fort, Base, Defensive Position)</option>
+            <option value="Landmark">Landmark (Natural or Manmade)</option>
+            <option value="Dungeon">Dungeon</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="description">Point of Interest Description</label>
+        <textarea class="form-control" id="description" name="poi[description]" rows="6" placeholder="Just look at those cheeks!"></textarea>
+    </div>
+    <button type="submit" class="btn btn-success col-sm-6 mx-auto">Submit</button>
+    </form>
+</div>
+
+<% include ../../../partials/footer %>

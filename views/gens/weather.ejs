@@ -1,0 +1,37 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1 class="warp-title pageTitle">Weather Forecast Generator</h1>
+    <div class="thumbnail"> 
+        <img class="img-responsive region col-sm-6 col-centered mx-auto" src="/img/special/weather.jpg" />
+    </div>
+    <div class="row">
+        <a href="#" class="btn btn-primary btn-spacing col-md-4 mx-auto" onclick="getWeather()">Generate New Forecast</a>
+    </div>
+    <div class="row" id="forecastContainer"> 
+
+    </div>
+</div>
+
+<% include ../partials/footer %>
+
+<script>
+
+function getWeather(){
+    var forecast = "";
+    $.get( "/api/gens/weather", function(data){
+            data.forEach(function(forecastItem){
+            forecast+="<div class=\"region col-sm-6 col-centered mx-auto\">";
+            forecast+="<div class=\"thumbnail\">";
+            forecast+="<img class=\"img-responsive\" src=\"/img/weather/" + forecastItem.image + "\" />";
+            forecast+="</div>";
+            forecast+="<h2>" + forecastItem.type + "</h2>";
+            forecast+= "<h3 class=\"biome\">Duration: " + forecastItem.duration + " hours</h3>";
+            forecast+= "<p style=\"white-space: pre-wrap\">" + forecastItem.description + "</p>";
+            forecast+= "</div>";
+        });
+            $("#forecastContainer").html(forecast);
+        }
+    );
+}
+</script>

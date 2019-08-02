@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>DM Tools - <%= pageTitle %> </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="/css/coverstyles.css">
+        <link rel="stylesheet" type="text/css" href="/css/loginstyles.css">
+    </head>
+    <body class="text-center">
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #000000;">
+    <a class="navbar-brand" href="/">DM Tools</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <% leftNav.forEach(function(navItem){ %>
+            <% if (navItem.pageTitle === pageTitle){ %>
+                <li class="nav-item active">
+            <% } else { %>
+                <li class="nav-item">
+            <% } %>
+                <a class="nav-link" href="<%= navItem.pageURL %>"><%= navItem.pageTitle %></a>
+            </li>
+        <% }); %>
+        <% if(currentUser) { %>
+            <% if(currentUser.admin) { %>
+                <% adminNav.forEach(function(navItem){ %>
+                <% if (navItem.pageTitle === pageTitle){ %>
+                    <li class="nav-item active">
+                <% } else { %>
+                    <li class="nav-item">
+                <% } %>
+                    <a class="nav-link" href="<%= navItem.pageURL %>"><%= navItem.pageTitle %></a>
+                </li>
+            <% }); %>
+        <% }} %>   
+      </ul>
+      <ul class="navbar-nav ml-auto">
+      <% if(!currentUser) { %>
+        <li class="nav-item">
+            <a class="nav-link" href="/register">Sign Up</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Log In</a>
+        </li>
+    <% } else { %>
+        <li class="nav-item">
+            <a class="nav-link" href="/logout">Log Out</a>
+        </li>
+    <% } %>
+      </ul>
+    </div>
+  </nav>
+
+  

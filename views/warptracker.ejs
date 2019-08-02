@@ -1,0 +1,150 @@
+<% include partials/header %>
+<% warpColor = function(val)
+{
+    var color = "#3F0000";
+
+    if (val >= 1000)
+    {
+        color = "#111111";
+    }
+    else if (val >= 800)
+    {
+        color = "#ff0000";
+    }
+    else if (val >= 600)
+    {
+        color = "#ff6600";
+    }
+    else if (val >= 400)
+    {
+        color = "#ffff00";
+    }
+    else if (val >= 200)
+    {
+        color = "#66ffff";
+    }
+    else
+    {
+        color = "#00ff00";
+    }
+
+    return color;
+}
+%>
+
+<div class="container">
+    <h1 class="warp-title display-4">Warp Level Tracker</h1>
+    <div>
+        <h1 class="warp-title">Characters</h1>
+        <div class="row">
+        <% warpChars.forEach(function(char){ %>
+            <div class="warp-character col-lg-3 mx-auto">
+                <h2><%= char.name %></h2>
+                <p class="warp-player">Played by: <%= char.playerName %></p>
+                <p class="warp-heading">Current Warp Level</p>
+                <h3 class="warp-level" id="<%= char._id %>" style="color: <%= warpColor(char.currentWarp) %>;"><%= char.currentWarp %></h3>
+            </div>
+        <% }) %> 
+        </div>
+    </div>
+    <div>
+        <h1 class="warp-title">Alerts</h1>
+        <div id="alerts">  
+            <h6>No alerts at this time.</h6>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Update Warp</h2>
+        <form class="form-inline justify-content-center" action="#">
+            <label class="sr-only" for="upname">Character Name:</label>
+            <select class="form-control mb-2 mr-sm-2" name="name" id="upname" placeholder="Character Name">
+                <option value="all">All Characters</option>
+                <% warpChars.forEach(function(char){ %>
+                    <option value="<%= char._id %>"><%= char.name %></option>
+                <% }) %>       
+            <label class="sr-only" for="warpChange">Warp Change</label>
+            <input type="number" class="form-control mb-2 mr-sm-2" id="warpChange" name="warpChange" placeholder="Warp Change">
+
+            <button onClick="updateChars()" type="button" class="btn btn-primary mb-2 warp-button">Update Character(s)</button>
+        </form>
+    </div>
+
+    <div class="container">
+        <h2>New Character</h2>
+        <form class="form-inline justify-content-center" action="/newwarpchar" method="POST">
+            <label class="sr-only" for="name">Character Name:</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" name="name" id="name" placeholder="Character Name">
+
+            <label class="sr-only" for="playerName">Player Name</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="playerName" name="playerName" placeholder="Player Name">
+
+            <label class="sr-only" for="currentWarp">Current Warp</label>
+            <input type="number" class="form-control mb-2 mr-sm-2" id="currentWarp" name="currentWarp" placeholder="Current Warp">
+
+            <button type="submit" class="btn btn-primary mb-2 warp-button">Create Character</button>
+        </form>
+    </div>
+</div>
+
+<% include partials/footer %>
+
+<script>
+
+function warpColor(val)
+{
+    var color = "#3F0000";
+
+    if (val >= 1000)
+    {
+        color = "#111111";
+    }
+    else if (val >= 800)
+    {
+        color = "#ff0000";
+    }
+    else if (val >= 600)
+    {
+        color = "#ff6600";
+    }
+    else if (val >= 400)
+    {
+        color = "#ffff00";
+    }
+    else if (val >= 200)
+    {
+        color = "#66ffff";
+    }
+    else
+    {
+        color = "#00ff00";
+    }
+
+    return color;
+}
+    function updateChars(){
+        var alerts = "";
+        console.log($("#upname").val() +"/"+ $("#warpChange").val());
+        $.post( "/api/gens/updatewarp/" + $("#upname").val() +"/"+ $("#warpChange").val(), function(data){
+            $.get("/api/gens/warp/updateVals", function(data) {
+                if (data)
+                {
+                    data.forEach(function(char){
+                        $("#" + char.id).html(char.warp).css("color", warpColor(char.warp));
+                    });
+                }
+            });
+            if (data)
+                {
+                    data.forEach(function(alert){
+                        alerts+="<h6 style=\"color: " + alert.color + "\" >" + alert.text + "</h2>";
+                    }
+                )};
+                if(alerts == "")
+                {
+                    alerts = "<h6>No alerts at this time.</h6>"
+                }
+                $("#alerts").html(alerts);
+            }
+        );
+    }
+</script>

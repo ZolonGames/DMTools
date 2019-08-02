@@ -1,0 +1,26 @@
+<% include ../../partials/header %>
+
+<div class="container">
+    <h1>New Subregion for <%= region.name %></h1>
+    <form action="/region/<%= region._id %>/subregions/new" method="POST" class="form-signin form-subregion">
+    <div class="form-group">
+        <label for="name">Subregion Name</label>
+        <input type="text" class="form-control" id="name" name="subregion[name]" placeholder="Forgotten Hills">
+    </div>
+    <div class="form-group">
+        <label for="image">Image Filename</label>
+        <input type="text" class="form-control" id="image" name="subregion[imagePath]" placeholder="region.jpg">
+    </div>
+    <div class="form-group">
+        <label for="biome">Biome</label>
+        <input type="text" class="form-control" id="biome" name="subregion[biome]" placeholder="Wasteland">
+    </div>
+    <div class="form-group">
+        <label for="description">Subregion Description</label>
+        <textarea class="form-control" id="description" name="subregion[description]" rows="4" placeholder="This is the end of the world."></textarea>
+    </div>
+    <button type="submit" class="btn btn-success col-sm-12">Submit</button>
+    </form>
+</div>
+
+<% include ../../partials/footer %>

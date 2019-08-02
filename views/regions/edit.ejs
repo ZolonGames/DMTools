@@ -1,0 +1,29 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1>Edit: <%= region.name %></h1>
+    <form action="/region/<%= region._id %>?_method=PUT" method="POST" class="form-signin">
+    <div class="form-group">
+        <label for="name">Region Name</label>
+        <input type="text" class="form-control" id="name" name="region[name]" value="<%= region.name %>">
+    </div>
+    <div class="form-group">
+        <label for="image">Image Filename</label>
+        <input type="text" class="form-control" id="image" name="region[imagePath]" value="<%= region.imagePath %>">
+    </div>
+    <div class="form-group">
+        <label for="biome">Biome</label>
+        <input type="text" class="form-control" id="biome" name="region[biome]" value="<%= region.biome %>">
+    </div>
+    <div class="form-group">
+        <label for="description">Region Name</label>
+        <textarea class="form-control" id="description" name="region[description]" rows="4"><%= region.description %></textarea>
+    </div>
+    <button type="submit" class="btn btn-success col-sm-12">Submit</button>
+    </form>
+    <form action="/region/<%= region._id %>?_method=DELETE" method="POST" class="form-signin">
+        <button type="submit" class="btn btn-primary col-sm-12">Delete</button>
+    </form>
+</div>
+
+<% include ../partials/footer %>

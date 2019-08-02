@@ -1,0 +1,85 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1 class="warp-title pageTitle">Warp Effect Generator</h1>
+    <div class="thumbnail"> 
+        <img class="img-responsive region col-sm-6 col-centered mx-auto" src="/img/special/warpeffect.jpg" />
+    </div>
+    <div class="row">
+        <a href="#" class="btn btn-primary btn-spacing col-md-3 mx-auto" onclick="getMinorAnomaly()">Generate Minor Anomaly</a>
+        <a href="#" class="btn btn-primary btn-spacing col-md-3 mx-auto" onclick="getMajorAnomaly()">Generate Major Anomaly</a>
+    </div>
+    <div class="row">
+        <a href="#" class="btn btn-primary btn-spacing col-md-3 mx-auto" onclick="getMinorManifestation()">Generate Minor Manifestation</a>
+        <a href="#" class="btn btn-primary btn-spacing col-md-3 mx-auto" onclick="getMajorManifestation()">Generate Major Manifestation</a>
+    </div>
+    <div class="row">
+        <a href="#" class="btn btn-primary btn-spacing col-md-3 mx-auto" onclick="getMinorMutation()">Generate Minor Mutation</a>
+        <a href="#" class="btn btn-primary btn-spacing col-md-3 mx-auto" onclick="getMajorMutation()">Generate Major Mutation</a>
+        <a href="#" class="btn btn-primary btn-spacing col-md-3 mx-auto" onclick="getTransformativeMutation()">Generate Transformative Mutation</a>
+    </div>
+    <div> 
+        <p id="effectContainer" style="white-space: pre-wrap; text-align: center"></p>
+    </div>
+</div>
+
+<% include ../partials/footer %>
+
+<script>
+
+function getMinorAnomaly(){
+    var effect = "";
+    $.get( "/api/gens/warpeffect/minor/anomaly", function(data){
+            $("#effectContainer").html(data);
+        }
+    );
+}
+
+function getMajorAnomaly(){
+    var effect = "";
+    $.get( "/api/gens/warpeffect/major/anomaly", function(data){
+            $("#effectContainer").html(data);
+        }
+    );
+}
+
+function getMinorManifestation(){
+    var effect = "";
+    $.get( "/api/gens/warpeffect/minor/manifestation", function(data){
+            $("#effectContainer").html(data);
+        }
+    );
+}
+
+function getMajorManifestation(){
+    var effect = "";
+    $.get( "/api/gens/warpeffect/major/manifestation", function(data){
+            $("#effectContainer").html(data);
+        }
+    );
+}
+
+function getMinorMutation(){
+    var effect = "";
+    $.get( "/api/gens/warpeffect/minor/mutation", function(data){
+            $("#effectContainer").html(data);
+        }
+    );
+}
+
+function getMajorMutation(){
+    var effect = "";
+    $.get( "/api/gens/warpeffect/major/mutation", function(data){
+            $("#effectContainer").html(data);
+        }
+    );
+}
+
+function getTranformativeMutation(){
+    var effect = "";
+    $.get( "/api/gens/warpeffect/transformative/mutation", function(data){
+            $("#effectContainer").html(data);
+        }
+    );
+}
+</script>

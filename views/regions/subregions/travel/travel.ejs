@@ -1,0 +1,26 @@
+<% include ../../../partials/header %>
+
+<div class="container">
+    <h1 class="warp-title pageTitle"><%= region.name %></h1>
+    <div class="thumbnail"> 
+        <img class="img-responsive region col-sm-6 col-centered mx-auto" src="/img/regions/subregions/<%= region.imagePath %>" />
+    </div>
+    <h2 class="warp-title pageTitle">Travel Links</h2>
+    <div class="row">
+        <a href="/region/<%= regionID %>/subregions/<%= region._id %>/travel/new" class="btn btn-primary btn-spacing col-md-4 mx-auto">Add travel</a>
+    </div>
+    <div class="row">
+    <% region.travelLinks.forEach(function(travel){ %>
+        <div class="warp-character col-sm-4 col-centered mx-auto">
+            <h2><%= travel.to.name %></h2>
+            <h3 class="biome"><%= travel.method %></h3>
+            <p class="description">It will take <%= travel.duration %> hours to reach the destination via this method of travel.</p>
+            <div class="row">
+                <a href="/region/<%= regionID %>/subregions/<%= region._id %>/travel/<%= travel._id %>/edit" class="btn btn-primary btn-region col-sm-8 mx-auto">Edit/Delete</a>
+            </div>
+        </div>
+    <% }) %> 
+    </div>
+</div>
+
+<% include ../../../partials/footer %>

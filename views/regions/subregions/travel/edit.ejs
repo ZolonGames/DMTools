@@ -1,0 +1,57 @@
+<% include ../../../partials/header %>
+
+<div class="container">
+    <h1>Edit: From <%= travel.from.name %> to <% travel.to.name %></h1>
+    <form action="/region/<%= regionID %>/subregions/<%= subID %>/travel/<%= travel._id %>?_method=PUT" method="POST" class="form-signin form-encounter">
+    <div class="form-group">
+        <label for="regions">Region</label>
+        <select class="form-control" id="regions">
+        <% regions.forEach(function(region){ %>
+            <option value="<%= region %>"><%= region.name %></option>
+        <% }) %>    
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="to">Destination (Was <%= travel.to.name %>)</label>
+        <select class="form-control" id="to" name="travel[to]">
+        <% selectedRegion.subregions.forEach(function(region){ %>
+            <option value="<%= region._id %>"><%= region.name %></option>
+        <% }) %>    
+        </select>
+    </div>
+    <div class="form-group">
+    <label for="method">Method (Was "<%= travel.method %>"")</label>
+        <select class="form-control" id="method" name="travel[method]">
+            <option value="On Foot">On Foot</option>
+            <option value="Flight">Flight</option>
+            <option value="By Sea">By Sea</option>
+            <option value="Via Magic">Via Magic</option>
+            <option value="Via Portal">Via Portal</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="duration">Travel Duration (hours)</label>
+        <input type="number" class="form-control" id="duration" name="travel[duration]" value="<%= travel.duration %>">
+    </div>
+    <button type="submit" class="btn btn-success col-sm-6 mx-auto">Submit</button>
+    </form>
+    <form action="/region/<%= regionID %>/subregions/<%= subID %>/travel/<%= travel._id %>?_method=DELETE" method="POST" class="form-signin form-encounter">
+        <button type="submit" class="btn btn-primary col-sm-6 mx-auto">Delete</button>
+    </form>
+</div>
+
+<% include ../../../partials/footer %>
+
+<script>
+$("#regions").on('change',function(){
+    selectedRegion = $(this).val();
+    var options = "";
+    $.get( "/api/search/travel/subregions/" + selectedRegion, function(data){
+            data.forEach(function(subregion){
+            options+="<option value=" + subregion.id + ">" + subregion.name + "</option>"
+        });
+            $("#to").html(options);
+        }
+    );
+});
+</script>

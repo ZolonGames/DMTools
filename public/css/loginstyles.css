@@ -1,0 +1,140 @@
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-encounter{
+  max-width: 600px;
+}
+
+.btn-primary
+{
+  background: #b50000;
+  border-color: #b50000;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:active:focus
+{
+  background: #910000 !important;
+  border-color: #910000 !important;
+}
+
+.warp-character {
+  border: 3px #303030 solid;
+  padding: .25em;
+  margin: .5em;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+}
+
+.warp-character h2 {
+  border-bottom: 4px #303030 solid;
+  padding-bottom: .3em;
+}
+
+.warp-character .warp-player {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.warp-heading {
+  border-bottom: 6px #303030 solid;
+  margin-bottom: .25em;
+  margin-top: .1em;
+}
+
+.warp-level {
+  background: #404040;
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, .5);
+  width: 40%;
+  text-align: center;
+  margin: 0 auto;
+  padding: .5em;
+}
+
+.region {
+  border: 3px #303030 solid;
+  padding: .25em;
+  margin: .5em;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, .5);
+}
+
+.btn-spacing {
+  margin-bottom: 1em;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.col-centered {
+  float: none;
+  margin: 0, auto;
+}
+
+.pageTitle {
+  margin: .5em;
+}
+
+.biome {
+  font-style: italic;
+  font-size: .8em;
+}
+
+.region-description {
+  border-bottom: 4px #303030 solid;
+  padding-bottom: 1em;
+  height: 150px;
+}
+
+.btn-region {
+  margin: .5em auto !important;
+}
+
+.description {
+  white-space: pre-wrap;
+}
+
+@media(max-width: 600px) {
+  .warp-button {
+    width: 100%;
+  }
+
+  .warp-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0 auto;
+    border-bottom: 5px #303030 solid;
+    width: 100%
+  }
+
+  .warp-character h2 {
+    font-size: 1.4em;
+  }
+
+  .warp-character {
+    width: 70%;
+    margin: 1em auto;
+  }
+
+  .btn-spacing {
+    margin: .5em;
+    width: 80%;
+  }
+
+  .btn-region {
+    width: 80%;
+  }
+
+  .form-encounter {
+    max-width: 330px;
+  }
+
+  .region-description {
+    border-bottom: 4px #303030 solid;
+    padding-bottom: 1em;
+    height: auto;
+  }
+}

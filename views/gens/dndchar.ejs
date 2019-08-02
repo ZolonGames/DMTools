@@ -1,0 +1,75 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1 class="warp-title pageTitle">D&D Character Generator Tool</h1>
+    <!--<div class="thumbnail"> 
+        <img class="img-responsive region col-sm-6 col-centered mx-auto" src="/img/special/warpeffect.jpg" />
+    </div>-->
+    <div class="row">
+        <a href="#" class="btn btn-primary btn-spacing col-md-3 mx-auto" onclick="getChar()">Generate Character</a>
+    </div>
+    <div class="row" id="charContainer"> 
+
+    </div>
+</div>
+
+<% include ../partials/footer %>
+
+<script>
+
+function getChar(){
+    var character = "";
+    $.get( "/api/gens/dndchar/", function(data){
+        console.log(data);
+        character+="<div class=\"region col-sm-6 col-centered mx-auto\">";
+        character+="<h2> Generated Character </h2>";
+        character+= "<h3 class=\"biome\">Level 1 " + data.gender + " " + data.race + " " + data.class + "</h3>";
+        character+= "<h3 class=\"biome\">" + data.alignment + "</h3>";
+        character+= "<h3 class=\"biome\">Background: " + data.background + "</h3>";
+        character+= "<table class=\"table\">";
+            character+= "<thead>";
+                character+= "<tr>";
+                    character+= "<th scope=\"col\">Attribute</th>"
+                    character+= "<th scope=\"col\">Value</th>"
+                    character+= "<th scope=\"col\">Modifier</th>"
+                character+= "</tr>";
+            character+= "</thead>";
+            character+= "<tbody>";
+                character+= "<tr>";
+                    character+= "<th scope=\"row\">Strength:</th>"
+                    character+= "<td>" + data.str + "</td>"
+                    character+= "<td>" + data.strmod + "</td>"
+                character+= "</tr>";
+                character+= "<tr>";
+                    character+= "<th scope=\"row\">Dexterity:</th>"
+                    character+= "<td>" + data.dex + "</td>"
+                    character+= "<td>" + data.dexmod + "</td>"
+                character+= "</tr>";
+                character+= "<tr>";
+                    character+= "<th scope=\"row\">Constitution:</th>"
+                    character+= "<td>" + data.con + "</td>"
+                    character+= "<td>" + data.conmod + "</td>"
+                character+= "</tr>";
+                character+= "<tr>";
+                    character+= "<th scope=\"row\">Intelligence:</th>"
+                    character+= "<td>" + data.int + "</td>"
+                    character+= "<td>" + data.intmod + "</td>"
+                character+= "</tr>";
+                character+= "<tr>";
+                    character+= "<th scope=\"row\">Wisdom:</th>"
+                    character+= "<td>" + data.wis + "</td>"
+                    character+= "<td>" + data.wismod + "</td>"
+                character+= "</tr>";
+                character+= "<tr>";
+                    character+= "<th scope=\"row\">Charisma:</th>"
+                    character+= "<td>" + data.cha + "</td>"
+                    character+= "<td>" + data.chamod + "</td>"
+                character+= "</tr>";
+            character+= "</tbody>";
+        character+= "</table>";
+        character+= "</div>";
+        $("#charContainer").html(character);
+        }
+    );
+}
+</script>

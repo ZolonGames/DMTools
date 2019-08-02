@@ -1,0 +1,121 @@
+<% include partials/header %>
+<% warpColor = function(val)
+{
+    var color = "#3F0000";
+
+    if (val >= 1000)
+    {
+        color = "#111111";
+    }
+    else if (val >= 800)
+    {
+        color = "#ff0000";
+    }
+    else if (val >= 600)
+    {
+        color = "#ff6600";
+    }
+    else if (val >= 400)
+    {
+        color = "#ffff00";
+    }
+    else if (val >= 200)
+    {
+        color = "#66ffff";
+    }
+    else
+    {
+        color = "#00ff00";
+    }
+
+    return color;
+}
+%>
+
+<div class="container">
+    <div>
+        <h1 class="warp-title">Rosyntil's Warp Level Tracker</h1>
+        <div class="row">
+        <% warpChars.forEach(function(char){ %>
+            <div class="warp-character col-md-2 mx-auto">
+                <h3><%= char.name %></h3>
+                <h3 class="warp-level" id="<%= char._id %>" style="color: <%= warpColor(char.currentWarp) %>;"><%= char.currentWarp %></h3>
+            </div>
+        <% }) %> 
+        </div>
+    </div>
+    <div>
+        <h2 class="warp-title">Alert History</h2>
+        <div id="alerts" class="row">  
+            <h6 class="mx-auto">No alerts at this time.</h6>
+        </div>
+    </div>
+</div>
+
+<% include partials/footer %>
+
+<script>
+
+function warpColor(val)
+{
+    var color = "#3F0000";
+
+    if (val >= 1000)
+    {
+        color = "#111111";
+    }
+    else if (val >= 800)
+    {
+        color = "#ff0000";
+    }
+    else if (val >= 600)
+    {
+        color = "#ff6600";
+    }
+    else if (val >= 400)
+    {
+        color = "#ffff00";
+    }
+    else if (val >= 200)
+    {
+        color = "#66ffff";
+    }
+    else
+    {
+        color = "#00ff00";
+    }
+
+    return color;
+}
+$( document ).ready(function() {
+    setInterval(function() {
+        var alertCount = 0;
+        alerts = "";
+    console.log("Refreshing Page...");
+    $.get( "/api/gens/open/rosyntil", function(data){
+            $.get("/api/gens/warp/updateVals", function(data) {
+                if (data)
+                {
+                    data.forEach(function(char){
+                        $("#" + char.id).html(char.warp).css("color", warpColor(char.warp));
+                    });
+                }
+            });
+            if (data)
+                {
+                    data.forEach(function(alert){
+                        alertCount++;
+                        alerts+="<h6 class=\"col-lg-3\" style=\"color: " + alert.color + "\" >" + alert.text + "</h2>";
+                    }
+                )};
+                if(alertCount == 0)
+                {
+                    alerts = "<h6>No alerts at this time.</h6>"
+                }
+                $("#alerts").html(alerts);
+            }
+        );
+}, 3 * 1000); // 60 * 1000 milsec
+});
+
+</script>

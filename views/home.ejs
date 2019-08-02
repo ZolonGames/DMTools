@@ -1,0 +1,10 @@
+<% include partials/header %>
+
+<div class="inner cover">
+    <h1 class="cover-heading">DM Tools - Coming Soon.</h1>
+</div>
+
+<p>Login Status: <% if(!currentUser){ %>  Not Logged  In  <% } else { %> Logged in as <%=currentUser.username %> <% } %> </p>
+<p>Admin Status: <% if(!currentUser){ %>  Not Admin  <% } else { %> Admin <% } %> </p>
+
+<% include partials/footer %>

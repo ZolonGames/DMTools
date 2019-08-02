@@ -1,0 +1,28 @@
+<% include ../../../partials/header %>
+
+<div class="container">
+    <h1 class="warp-title pageTitle"><%= region.name %></h1>
+    <div class="thumbnail"> 
+        <img class="img-responsive region col-sm-6 col-centered mx-auto" src="/img/regions/subregions/<%= region.imagePath %>" />
+    </div>
+    <h2 class="warp-title pageTitle">Encounter List</h2>
+    <div class="row">
+        <a href="/region/<%= regionID %>/subregions/<%= region._id %>/encounters/new" class="btn btn-primary btn-spacing col-md-4 mx-auto">Add Encounter</a>
+    </div>
+    <div class="row">
+    <% region.encounters.forEach(function(encounter){ %>
+        <div class="warp-character col-sm-4 col-centered mx-auto">
+            <h2><%= encounter.name %></h2>
+            <h3 class="biome"><%= encounter.rarity %></h3>
+            <h3 class="biome">Find DC: <%= (encounter.findDC != null || encounter.findDC == "0") ? encounter.findDC : "---" %></h3>
+            <h3 class="biome">Avoid DC: <%= (encounter.avoidDC != null || encounter.avoidDC == "0") ? encounter.avoidDC : "---" %></h3>
+            <p class="description"><%= encounter.description %></p>
+            <div class="row">
+                <a href="/region/<%= regionID %>/subregions/<%= region._id %>/encounters/<%= encounter._id %>/edit" class="btn btn-primary btn-region col-sm-8 mx-auto">Edit/Delete</a>
+            </div>
+        </div>
+    <% }) %> 
+    </div>
+</div>
+
+<% include ../../../partials/footer %>

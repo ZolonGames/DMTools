@@ -1,0 +1,27 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1 class="warp-title pageTitle">Mutant Creature Generator</h1>
+    <div class="thumbnail"> 
+        <img class="img-responsive region col-sm-6 col-centered mx-auto" src="/img/special/warpeffect.jpg" />
+    </div>
+    <div class="row">
+        <a href="#" class="btn btn-primary btn-spacing col-md-3 mx-auto" onclick="getCreatures()">Generate Mutated Life</a>
+    </div>
+    <div> 
+        <p id="effectContainer" style="white-space: pre-wrap; text-align: center"></p>
+    </div>
+</div>
+
+<% include ../partials/footer %>
+
+<script>
+
+function getCreatures(){
+    var effect = "";
+    $.get( "/api/gens/mutantcreatures", function(data){
+            $("#effectContainer").html(data);
+        }
+    );
+}
+</script>

@@ -1,0 +1,26 @@
+<% include ../partials/header %>
+
+<div class="container">
+    <h1>New Region</h1>
+    <form action="/region/new" method="POST" class="form-signin">
+    <div class="form-group">
+        <label for="name">Region Name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="Isentia">
+    </div>
+    <div class="form-group">
+        <label for="image">Image Filename</label>
+        <input type="text" class="form-control" id="image" name="image" placeholder="region.jpg">
+    </div>
+    <div class="form-group">
+        <label for="biome">Biome</label>
+        <input type="text" class="form-control" id="biome" name="biome" placeholder="Wasteland">
+    </div>
+    <div class="form-group">
+        <label for="description">Region Description</label>
+        <textarea class="form-control" id="description" name="description" rows="4" placeholder="This is the end of the world."></textarea>
+    </div>
+    <button type="submit" class="btn btn-success col-sm-12">Submit</button>
+    </form>
+</div>
+
+<% include ../partials/footer %>
